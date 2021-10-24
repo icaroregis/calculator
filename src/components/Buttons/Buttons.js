@@ -9,9 +9,7 @@ export default function ({ label, className }) {
   const [values, setValues] = useState([0, 0]);
   const [currentValue, setCurrentValue] = useState(0);
 
-  function teste(e) {
-    console.log(e);
-  }
+  console.log(buttonValue);
 
   return (
     <>
