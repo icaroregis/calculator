@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Calculator from '../Pages/Calculator/Calculator';
+import Calculator from '../pages/Calculator/Calculator';
 
 export default function Routes() {
   return (
