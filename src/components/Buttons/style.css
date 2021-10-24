@@ -13,3 +13,20 @@
 .ButtonsOfCalculator:active {
   background-color: var(--white-semiDark);
 }
+
+.ButtonsOfCalculator.double {
+  grid-column: span 2;
+}
+
+.ButtonsOfCalculator.triple {
+  grid-column: span 3;
+}
+
+.ButtonsOfCalculator.operation {
+  background-color: var(--orange-color);
+  color: var(--white-color);
+}
+
+.ButtonsOfCalculator.operation:active {
+  background-color: var(--orange-semiDarkTransparent);
+}
