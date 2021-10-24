@@ -1,7 +1,26 @@
 .ContainerCalculator {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, rgb(83, 105, 118), rgb(41, 46, 73));
+}
+
+.TitleCalculator {
+  margin-bottom: 1rem;
+  color: var(--white-color);
+  font-weight: 500;
+}
+
+.ThisCalculator {
   height: 320px;
   width: 235px;
   border-radius: 5px;
   overflow: hidden;
-  background-color: red;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: 1fr 48px 48px 48px 48px 48px;
 }
