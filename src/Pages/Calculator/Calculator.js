@@ -24,9 +24,6 @@ export default function Calculator() {
     { id: 17, label: '=', type: 'operation' },
   ];
 
-  function teste(e) {
-    console.log(e);
-  }
   return (
     <div className="ContainerCalculator">
       <h1 className="TitleCalculator">Calculadora</h1>
