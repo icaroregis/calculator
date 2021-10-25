@@ -1,43 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Buttons from '../../components/Buttons/Buttons';
 import Display from '../../components/Display/Display';
 import './style.css';
 
 export default function Calculator() {
-  const buttonContent = [
-    { id: 1, label: 'AC', type: 'triple' },
-    { id: 2, label: '/', type: 'operation' },
-    { id: 3, label: '7' },
-    { id: 4, label: '8' },
-    { id: 5, label: '9' },
-    { id: 6, label: '*', type: 'operation' },
-    { id: 7, label: '4' },
-    { id: 8, label: '5' },
-    { id: 9, label: '6' },
-    { id: 10, label: '-', type: 'operation' },
-    { id: 11, label: '1' },
-    { id: 12, label: '2' },
-    { id: 13, label: '3' },
-    { id: 14, label: '+', type: 'operation' },
-    { id: 15, label: '0', type: 'double' },
-    { id: 16, label: '.' },
-    { id: 17, label: '=', type: 'operation' },
-  ];
+  const [buttonValue, setButtonValue] = useState('');
+  const [displayValue, setDisplayValue] = useState('0');
+  const [clearDisplay, setClearDisplay] = useState(false);
+  const [mathOperation, setMathOperation] = useState(null);
+  const [values, setValues] = useState([0, 0]);
+  const [currentValue, setCurrentValue] = useState(0);
+
+  function clearMemory(e) {
+    console.log(e);
+    setButtonValue(e.target.value);
+    setDisplayValue('0');
+    setClearDisplay(false);
+    setMathOperation(null);
+    setValues([0, 0]);
+    setCurrentValue(0);
+  }
+
+  function setOperation(operation) {
+    setButtonValue(operation.target.value);
+  }
+
+  function addDigit(number) {
+    setButtonValue(number.target.value);
+    if (number === '.' && setDisplayValue(displayValue.includes('.'))) {
+      return;
+    }
+  }
+
+  console.log(buttonValue);
 
   return (
     <div className="ContainerCalculator">
       <h1 className="TitleCalculator">Calculadora</h1>
       <div className="ThisCalculator">
-        <Display value={100} />
-        {buttonContent.map((button) => {
-          return (
-            <Buttons
-              className={button.type}
-              key={button.id}
-              label={button.label}
-            />
-          );
-        })}
+        <Display value={displayValue} />
+        <Buttons onClick={clearMemory} label="AC" className="triple" />
+        <Buttons onClick={setOperation} label="/" className="operation" />
+        <Buttons onClick={addDigit} label="7" />
+        <Buttons onClick={addDigit} label="8" />
+        <Buttons onClick={addDigit} label="9" />
+        <Buttons onClick={setOperation} label="*" className="operation" />
+        <Buttons onClick={addDigit} label="4" />
+        <Buttons onClick={addDigit} label="5" />
+        <Buttons onClick={addDigit} label="6" />
+        <Buttons onClick={setOperation} label="-" className="operation" />
+        <Buttons onClick={addDigit} label="1" />
+        <Buttons onClick={addDigit} label="2" />
+        <Buttons onClick={addDigit} label="3" />
+        <Buttons onClick={setOperation} label="+" className="operation" />
+        <Buttons onClick={addDigit} label="0" className="double" />
+        <Buttons onClick={addDigit} label="." />
+        <Buttons onClick={setOperation} label="=" className="operation" />
       </div>
     </div>
   );

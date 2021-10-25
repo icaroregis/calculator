@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './style.css';
 
-export default function ({ label, className }) {
-  const [buttonValue, setButtonValue] = useState('');
-  const [displayValue, setDisplayValue] = useState('');
-  const [clearDisplay, setClearDisplay] = useState('');
-  const [operation, setOperation] = useState('');
-  const [values, setValues] = useState([0, 0]);
-  const [currentValue, setCurrentValue] = useState(0);
-
-  console.log(buttonValue);
-
+export default function (props) {
   return (
     <>
       <button
-        value={label}
-        onClick={({ target }) => setButtonValue(target.value)}
+        value={props.label}
+        onClick={(e) => props.onClick(e)}
         className={`ButtonsOfCalculator 
-      ${className === 'operation' ? 'operation' : ''}   
-      ${className === 'double' ? 'double' : ''}
-      ${className === 'triple' ? 'triple' : ''}`}
+      ${props.className === 'operation' ? 'operation' : ''}   
+      ${props.className === 'double' ? 'double' : ''}
+      ${props.className === 'triple' ? 'triple' : ''}`}
       >
-        {label}
+        {props.label}
       </button>
     </>
   );
