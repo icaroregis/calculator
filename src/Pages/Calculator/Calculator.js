@@ -6,10 +6,9 @@ import './style.css';
 export default function Calculator() {
   const [buttonValue, setButtonValue] = useState('');
   const [displayValue, setDisplayValue] = useState('0');
-  const [clearDisplay, setClearDisplay] = useState(false);
-  const [mathOperation, setMathOperation] = useState(null);
-  const [values, setValues] = useState([0, 0]);
-  const [currentValue, setCurrentValue] = useState(0);
+  const [result, setResult] = useState('');
+  const [accumulator, setAccumulator] = useState([0, 0]);
+  const [mathOperation, setMathOperation] = useState(false);
 
   function clearMemory(e) {
     console.log(e);
@@ -25,14 +24,23 @@ export default function Calculator() {
     setButtonValue(operation.target.value);
   }
 
-  function addDigit(number) {
+  function addDigitDisplay(digit) {
     setButtonValue(number.target.value);
-    if (number === '.' && setDisplayValue(displayValue.includes('.'))) {
+    if (
+      (digit === '+' || digit === '-' || digit === '*' || digit === '/') &&
+      mathOperation
+    ) {
+      console.log('+-*/');
+      setMathOperation(false);
+      setDisplayValue(result + digit);
       return;
     }
-  }
 
-  console.log(buttonValue);
+    if (mathOperation) {
+      setDisplayValue(digit);
+      setMathOperation(false);
+    }
+  }
 
   return (
     <div className="ContainerCalculator">
@@ -41,20 +49,20 @@ export default function Calculator() {
         <Display value={displayValue} />
         <Buttons onClick={clearMemory} label="AC" className="triple" />
         <Buttons onClick={setOperation} label="/" className="operation" />
-        <Buttons onClick={addDigit} label="7" />
-        <Buttons onClick={addDigit} label="8" />
-        <Buttons onClick={addDigit} label="9" />
+        <Buttons onClick={addDigitDisplay} label="7" />
+        <Buttons onClick={addDigitDisplay} label="8" />
+        <Buttons onClick={addDigitDisplay} label="9" />
         <Buttons onClick={setOperation} label="*" className="operation" />
-        <Buttons onClick={addDigit} label="4" />
-        <Buttons onClick={addDigit} label="5" />
-        <Buttons onClick={addDigit} label="6" />
+        <Buttons onClick={addDigitDisplay} label="4" />
+        <Buttons onClick={addDigitDisplay} label="5" />
+        <Buttons onClick={addDigitDisplay} label="6" />
         <Buttons onClick={setOperation} label="-" className="operation" />
-        <Buttons onClick={addDigit} label="1" />
-        <Buttons onClick={addDigit} label="2" />
-        <Buttons onClick={addDigit} label="3" />
+        <Buttons onClick={addDigitDisplay} label="1" />
+        <Buttons onClick={addDigitDisplay} label="2" />
+        <Buttons onClick={addDigitDisplay} label="3" />
         <Buttons onClick={setOperation} label="+" className="operation" />
-        <Buttons onClick={addDigit} label="0" className="double" />
-        <Buttons onClick={addDigit} label="." />
+        <Buttons onClick={addDigitDisplay} label="0" className="double" />
+        <Buttons onClick={addDigitDisplay} label="." />
         <Buttons onClick={setOperation} label="=" className="operation" />
       </div>
     </div>

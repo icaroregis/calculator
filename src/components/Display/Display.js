@@ -1,6 +1,11 @@
 import React from 'react';
 import './style.css';
 
-export default function ({ value }) {
-  return <div className="display">{value}</div>;
+export default function ({ value, result }) {
+  return (
+    <div className="display">
+      <span>{value}</span>
+      <span>{result}</span>
+    </div>
+  );
 }
