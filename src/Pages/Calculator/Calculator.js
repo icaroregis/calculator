@@ -4,41 +4,46 @@ import Display from '../../components/Display/Display';
 import './style.css';
 
 export default function Calculator() {
-  const [buttonValue, setButtonValue] = useState('');
-  const [displayValue, setDisplayValue] = useState('0');
-  const [result, setResult] = useState('');
-  const [accumulator, setAccumulator] = useState([0, 0]);
-  const [mathOperation, setMathOperation] = useState(false);
+  const [displayValue, setDisplayValue] = useState(0);
+  const [oldDisplayValue, setOldDisplayValue] = useState(0);
+  const [mathOperation, setMathOperation] = useState(0);
 
-  function clearMemory(e) {
-    console.log(e);
-    setButtonValue(e.target.value);
-    setDisplayValue('0');
-    setClearDisplay(false);
-    setMathOperation(null);
-    setValues([0, 0]);
-    setCurrentValue(0);
+  function clearMemory() {
+    setDisplayValue(0);
+    return;
   }
 
-  function setOperation(operation) {
-    setButtonValue(operation.target.value);
+  function setOperation(operator) {
+    const valueOperator = operator.target.value;
+    setMathOperation(valueOperator);
+    setOldDisplayValue(displayValue);
+    setDisplayValue(valueOperator);
+  }
+
+  function calculate() {
+    if (mathOperation === '/') {
+      setDisplayValue(Number(oldDisplayValue) / Number(displayValue));
+    } else if (mathOperation === '*') {
+      setDisplayValue(oldDisplayValue * displayValue);
+    } else if (mathOperation === '+') {
+      setDisplayValue(Number(oldDisplayValue) + Number(displayValue));
+    } else {
+      setDisplayValue(oldDisplayValue - displayValue);
+    }
   }
 
   function addDigitDisplay(digit) {
-    setButtonValue(number.target.value);
+    const numberValue = digit.target.value;
     if (
-      (digit === '+' || digit === '-' || digit === '*' || digit === '/') &&
-      mathOperation
+      displayValue === 0 ||
+      displayValue === '*' ||
+      displayValue === '+' ||
+      displayValue === '-' ||
+      displayValue === '/'
     ) {
-      console.log('+-*/');
-      setMathOperation(false);
-      setDisplayValue(result + digit);
-      return;
-    }
-
-    if (mathOperation) {
-      setDisplayValue(digit);
-      setMathOperation(false);
+      setDisplayValue(digit.target.value);
+    } else {
+      setDisplayValue(displayValue + numberValue);
     }
   }
 
@@ -63,7 +68,7 @@ export default function Calculator() {
         <Buttons onClick={setOperation} label="+" className="operation" />
         <Buttons onClick={addDigitDisplay} label="0" className="double" />
         <Buttons onClick={addDigitDisplay} label="." />
-        <Buttons onClick={setOperation} label="=" className="operation" />
+        <Buttons onClick={calculate} label="=" className="operation" />
       </div>
     </div>
   );
