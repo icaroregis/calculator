@@ -24,11 +24,11 @@ export default function Calculator() {
     if (mathOperation === '/') {
       setDisplayValue(Number(oldDisplayValue) / Number(displayValue));
     } else if (mathOperation === '*') {
-      setDisplayValue(oldDisplayValue * displayValue);
+      setDisplayValue(Number(oldDisplayValue) * Number(displayValue));
     } else if (mathOperation === '+') {
       setDisplayValue(Number(oldDisplayValue) + Number(displayValue));
     } else {
-      setDisplayValue(oldDisplayValue - displayValue);
+      setDisplayValue(Number(oldDisplayValue) - Number(displayValue));
     }
   }
 
